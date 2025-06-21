@@ -2,7 +2,7 @@
 """Game board and card management"""
 
 from card import Card
-from constants import CARD_POSITIONS_X, SCREEN_HEIGHT, PLAYER_HEIGHT, CARD_DIMENSIONS, NUM_CARDS
+from constants import BOARD_POSITIONS_X, SCREEN_HEIGHT, CARD_DIMENSIONS, NUM_BOARD_CARDS, BOARD_Y_OFFSET
 
 class Board:
     def __init__(self, asset_manager):
@@ -12,10 +12,10 @@ class Board:
     
     def create_cards(self):
         """Create all cards in their initial positions"""
-        y_position = SCREEN_HEIGHT - PLAYER_HEIGHT - CARD_DIMENSIONS[1]
+        y_position = BOARD_Y_OFFSET
         
-        for i in range(NUM_CARDS):
-            x_position = CARD_POSITIONS_X[i]
+        for i in range(NUM_BOARD_CARDS):
+            x_position = BOARD_POSITIONS_X[i]
             card = Card(x_position, y_position, self.asset_manager, 'base')
             self.cards.append(card)
     
