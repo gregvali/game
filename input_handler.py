@@ -26,15 +26,15 @@ class InputHandler:
                 
                 if self.poker_stage == 1:
                     # First press: open cards 0, 1, 2 (first three cards)
-                    board.set_card_type(0, 'joker')
-                    board.set_card_type(1, 'joker') 
-                    board.set_card_type(2, 'joker')
+                    board.set_card_type(0, 'ah')
+                    board.set_card_type(1, 'kd') 
+                    board.set_card_type(2, 'qc')
                 elif self.poker_stage == 2:
                     # Second press: open card 3 (fourth card)
-                    board.set_card_type(3, 'joker')
+                    board.set_card_type(3, 'js')
                 elif self.poker_stage == 3:
                     # Third press: open card 4 (fifth card)
-                    board.set_card_type(4, 'joker')
+                    board.set_card_type(4, 'th')
                 
                 self.input_timeout = 1
             elif keys[pygame.K_LEFT] and self.poker_stage > 0:
