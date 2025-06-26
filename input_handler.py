@@ -4,6 +4,7 @@
 import pygame
 from constants import INPUT_DELAY_IN_TICKS, NUM_BOARD_CARDS
 
+RANDOM = 'random'
 class InputHandler:
     def __init__(self):
         self.input_timeout = 0
@@ -19,38 +20,24 @@ class InputHandler:
     def handle_input(self, board):
         """Handle keyboard input - poker style card opening"""
         keys = pygame.key.get_pressed()
-        
         if self.input_timeout == 0:
-            if keys[pygame.K_RIGHT] and self.poker_stage < 3:
-                self.poker_stage += 1
-                
-                if self.poker_stage == 1:
-                    # First press: open cards 0, 1, 2 (first three cards)
-                    board.set_card_type(0, 'ah')
-                    board.set_card_type(1, 'kd') 
-                    board.set_card_type(2, 'qc')
-                elif self.poker_stage == 2:
-                    # Second press: open card 3 (fourth card)
-                    board.set_card_type(3, 'js')
-                elif self.poker_stage == 3:
-                    # Third press: open card 4 (fifth card)
-                    board.set_card_type(4, 'th')
-                
-                self.input_timeout = 1
-            elif keys[pygame.K_LEFT] and self.poker_stage > 0:
-                # Optional: Allow going back one stage
-                if self.poker_stage == 3:
-                    board.set_card_type(4, 'base')
-                elif self.poker_stage == 2:
-                    board.set_card_type(3, 'base')
-                elif self.poker_stage == 1:
-                    board.set_card_type(0, 'base')
-                    board.set_card_type(1, 'base')
-                    board.set_card_type(2, 'base')
-                
-                self.poker_stage -= 1
-                self.input_timeout = 1
+            if keys[pygame.K_RIGHT]:
+                self.handle_key_right(board)
+            elif keys[pygame.K_LEFT]:
+                self.handle_key_left(board)
     
+    def handle_key_right(self, board):
+        if self.poker_stage < 3:
+            self.poker_stage += 1
+            board.next_card(self.poker_stage, RANDOM)
+            self.input_timeout = 1
+
+    def handle_key_left(self, board):
+        if self.poker_stage > 0:
+            board.reset_board()
+            self.poker_stage = 0
+            self.input_timeout = 1
+
     def get_timeout(self):
         """Get current input timeout"""
         return self.input_timeout

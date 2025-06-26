@@ -22,8 +22,27 @@ class Board:
     def set_card_type(self, index, card_type):
         """Set the type of a specific card"""
         if 0 <= index < len(self.cards):
-            self.cards[index].set_type(card_type)
+            if card_type == 'random':
+                self.cards[index].set_random_type()
+            else:
+                self.cards[index].set_type(card_type)
     
+    def next_card(self, stage, card_type):
+        if stage == 1:
+            # First press: open cards 0, 1, 2 (first three cards)
+            for i in range(3):
+                self.set_card_type(i, card_type)
+        elif stage == 2:
+            # Second press: open card 3 (fourth card)
+            self.set_card_type(3, card_type)
+        elif stage == 3:
+            # Third press: open card 4 (fifth card)
+            self.set_card_type(4, card_type)
+
+    def reset_board(self):
+        for card in self.cards:
+            card.card_type = 'base'
+        
     def draw(self, screen):
         """Draw all cards to the screen"""
         for card in self.cards:
