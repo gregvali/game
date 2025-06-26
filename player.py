@@ -17,7 +17,7 @@ class Player:
         
         for i in range(NUM_PLAYER_CARDS):
             x_position = PLAYER_POSITIONS_X[i]
-            card = Card(x_position, y_position, self.asset_manager, 'joker')
+            card = Card(x_position, y_position, self.asset_manager, 'random')
             self.hand.append(card)
     
     def draw(self, screen):

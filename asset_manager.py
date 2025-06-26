@@ -2,6 +2,7 @@
 """Asset loading and management"""
 
 import pygame
+import random
 from constants import CARD_DIMENSIONS, ASSETS
 
 class AssetManager:
@@ -31,3 +32,8 @@ class AssetManager:
     def get_asset(self, name):
         """Get an asset by name"""
         return self.assets.get(name, self.create_placeholder())
+    
+    def get_random_asset_key(self):
+        random_id = random.randint(2, 53)
+        keys = list(self.assets.keys())
+        return keys[random_id]

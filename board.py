@@ -2,7 +2,7 @@
 """Game board and card management"""
 
 from card import Card
-from constants import BOARD_POSITIONS_X, SCREEN_HEIGHT, CARD_DIMENSIONS, NUM_BOARD_CARDS, BOARD_Y_OFFSET
+from constants import BOARD_POSITIONS_X, NUM_BOARD_CARDS, BOARD_Y_OFFSET
 
 class Board:
     def __init__(self, asset_manager):
@@ -22,10 +22,7 @@ class Board:
     def set_card_type(self, index, card_type):
         """Set the type of a specific card"""
         if 0 <= index < len(self.cards):
-            if card_type == 'random':
-                self.cards[index].set_random_type()
-            else:
-                self.cards[index].set_type(card_type)
+            self.cards[index].set_type(card_type)
     
     def next_card(self, stage, card_type):
         if stage == 1:
