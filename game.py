@@ -6,7 +6,7 @@ import sys
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, BG_COLOR
 from asset_manager import AssetManager
 from board import Board
-from player import Player
+from players import Players
 from input_handler import InputHandler
 from ui import UI
 
@@ -20,7 +20,7 @@ class Game:
         # Initialize game components
         self.asset_manager = AssetManager()
         self.board = Board(self.asset_manager)
-        self.player = Player(self.asset_manager)
+        self.players = Players(self.asset_manager)
         self.input_handler = InputHandler()
         self.ui = UI()
         
@@ -49,12 +49,12 @@ class Game:
         
         # Draw game objects
         self.board.draw(self.screen)
-        self.player.draw(self.screen)
+        self.players.draw(self.screen)
         
         # Draw UI
         self.ui.draw_debug_info(self.screen, self.ticks, self.input_handler.get_timeout(), self.input_handler.get_poker_stage())
         self.ui.draw_instructions(self.screen)
-        self.ui.draw_player_name(self.screen, self.player.get_name())
+        self.ui.draw_player_names(self.screen, self.players.get_names())
         
         pygame.display.flip()
     

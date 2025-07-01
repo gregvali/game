@@ -2,7 +2,7 @@
 """UI rendering and display"""
 
 import pygame
-from constants import SCREEN_HEIGHT, NAME_Y_OFFSET
+from constants import SCREEN_HEIGHT, NAME_Y_OFFSET, PLAYER_POSITIONS_X, NUM_PLAYERS
 
 class UI:
     def __init__(self):
@@ -25,11 +25,11 @@ class UI:
         screen.blit(instruction_text, (10, 130))
         screen.blit(stage_info, (10, 170))
 
-    def draw_player_name(self, screen, player_name):
+    def draw_player_names(self, screen, player_names):
         """Draw player name at the bottom of screen"""
-        name_text = self.font.render(player_name, True, (255, 255, 255))
-        # Center the name horizontally
-        text_rect = name_text.get_rect()
-        text_rect.centerx = screen.get_width() // 2
-        text_rect.y = SCREEN_HEIGHT - NAME_Y_OFFSET
-        screen.blit(name_text, (text_rect.x, text_rect.y))
+        for i in range(NUM_PLAYERS):
+            name_text = self.font.render(player_names[i], True, (255, 255, 255))
+            text_rect = name_text.get_rect()
+            text_rect.centerx = PLAYER_POSITIONS_X[i][0] + 102
+            text_rect.y = SCREEN_HEIGHT - NAME_Y_OFFSET
+            screen.blit(name_text, (text_rect.x, text_rect.y))
