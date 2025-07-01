@@ -37,3 +37,45 @@ class Card:
         self.y = y
         self.rect.x = x
         self.rect.y = y
+
+    def get_rank(self):
+        """Get the rank of the card (2-14, where 11=J, 12=Q, 13=K, 14=A)"""
+        if self.card_type == 'base' or self.card_type == 'joker':
+            return None
+            
+        rank_char = self.card_type[0].lower()
+        if rank_char == 'a':
+            return 14
+        elif rank_char == 'k':
+            return 13
+        elif rank_char == 'q':
+            return 12
+        elif rank_char == 'j':
+            return 11
+        elif rank_char == 't':
+            return 10
+        else:
+            return int(rank_char)
+    
+    def get_suit(self):
+        """Get the suit of the card (hearts, diamonds, clubs, spades)"""
+        if self.card_type == 'base' or self.card_type == 'joker':
+            return None
+            
+        suit_char = self.card_type[1].lower()
+        suit_map = {'h': 'hearts', 'd': 'diamonds', 'c': 'clubs', 's': 'spades'}
+        return suit_map.get(suit_char)
+    
+    def get_rank_name(self):
+        """Get human-readable rank name"""
+        rank = self.get_rank()
+        if rank is None:
+            return None
+        rank_names = {11: 'Jack', 12: 'Queen', 13: 'King', 14: 'Ace'}
+        return rank_names.get(rank, str(rank))
+    
+    def __str__(self):
+        """String representation of the card"""
+        if self.card_type in ['base', 'joker']:
+            return self.card_type
+        return f"{self.get_rank_name()} of {self.get_suit().title()}"

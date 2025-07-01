@@ -9,6 +9,8 @@ class InputHandler:
     def __init__(self):
         self.input_timeout = 0
         self.poker_stage = 0  # 0: not started, 1: first 3 cards, 2: fourth card, 3: fifth card
+        self.show_hand_evaluations = False
+        self.show_winners = False
     
     def update(self):
         """Update input timeout"""
@@ -25,6 +27,10 @@ class InputHandler:
                 self.handle_key_right(board)
             elif keys[pygame.K_LEFT]:
                 self.handle_key_left(board)
+            elif keys[pygame.K_h]:
+                self.toggle_hand_evaluations()
+            elif keys[pygame.K_w]:
+                self.toggle_winners()
     
     def handle_key_right(self, board):
         if self.poker_stage < 3:
@@ -38,6 +44,16 @@ class InputHandler:
             self.poker_stage = 0
             self.input_timeout = 1
 
+    def toggle_hand_evaluations(self):
+        """Toggle display of hand evaluations"""
+        self.show_hand_evaluations = not self.show_hand_evaluations
+        self.input_timeout = 1
+    
+    def toggle_winners(self):
+        """Toggle display of winners"""
+        self.show_winners = not self.show_winners
+        self.input_timeout = 1
+    
     def get_timeout(self):
         """Get current input timeout"""
         return self.input_timeout
@@ -45,3 +61,11 @@ class InputHandler:
     def get_poker_stage(self):
         """Get current poker stage"""
         return self.poker_stage
+    
+    def get_show_hand_evaluations(self):
+        """Get whether to show hand evaluations"""
+        return self.show_hand_evaluations
+    
+    def get_show_winners(self):
+        """Get whether to show winners"""
+        return self.show_winners
