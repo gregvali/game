@@ -55,7 +55,6 @@ class Game:
         self.ui.draw_debug_info(self.screen, self.ticks, self.input_handler.get_timeout(), self.input_handler.get_poker_stage())
         self.ui.draw_instructions(self.screen)
         self.ui.draw_player_names(self.screen, self.players.get_names())
-        self.ui.draw_hand_info_toggle(self.screen)
         
         # Draw hand evaluations if enabled
         if self.input_handler.get_show_hand_evaluations():

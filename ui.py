@@ -87,8 +87,4 @@ class UI:
         
         screen.blit(winner_surface, winner_rect)
         screen.blit(hand_surface, hand_rect)
-    
-    def draw_hand_info_toggle(self, screen):
-        """Draw instructions for toggling hand info"""
-        toggle_text = self.small_font.render("Press H to toggle hand evaluations", True, (200, 200, 200))
-        screen.blit(toggle_text, (10, 210))
+        
